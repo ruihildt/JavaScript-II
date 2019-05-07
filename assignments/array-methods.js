@@ -95,11 +95,57 @@ const ticketPriceTotal = runners.reduce(reducer, 0)
 
 console.log(ticketPriceTotal); 
 
+
 // ==== Challenge 5: Be Creative ====
 // Now that you have used .forEach(), .map(), .filter(), and .reduce().  I want you to think of potential problems you could solve given the data set and the 5k fun run theme.  Try to create and then solve 3 unique problems using one or many of the array methods listed above.
 
 // Problem 1
+// Find all donors with a donation bigger than 100 and put their lastname into an array sorted alphabetically
+
+// Create an array with all runners who made a donation bigger than 100
+const over100Donators = runners.filter(runner => runner.donation >= 100);
+
+// Create a new array with only the lastname of those donators
+let fullNamesOfOver100Donators = [];
+
+over100Donators.forEach(runner => {
+    fullNamesOfOver100Donators.push(runner.last_name);
+    fullNamesOfOver100Donators.sort();
+});
+
+console.log(fullNamesOfOver100Donators);
+
 
 // Problem 2
+// Find all runners who are sized S and whose name start by S
+
+// List of all donators who are sized S
+const smallShirts = runners.filter(runner => runner.shirt_size == "S");
+
+// Filter only people whose names start by S
+let smallAndS =[];
+
+smallShirts.forEach(runner => {
+    if (runner.last_name.charAt(0) == "S") {
+        smallAndS.push(runner.last_name);
+    }
+})
+
+console.log(smallAndS);
+
 
 // Problem 3
+// Who has the longest email adress?
+
+//Find what is the longest email length
+function getLengthOfLongestEmail(array) {
+    return Math.max(0, ...array.map(runner => runner.email.length));
+}
+
+longestEmail = getLengthOfLongestEmail(runners);
+
+//Output a list of all runners with an email size of 30 characters
+const longestEmailRunners = runners.filter(runner => runner.email.length == 30);
+
+// Finally return the amazing fact
+console.log(`Hi, my name is ${longestEmailRunners[0].first_name} ${longestEmailRunners[0].last_name} and amazingly, I'm the only runner with the longest email and whose shirt size is the same as the initial of his lastname. Rui discovered this by chance while doing this exercise.`);

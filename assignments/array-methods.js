@@ -56,28 +56,96 @@ const runners = [{"id":1,"first_name":"Charmain","last_name":"Seiler","email":"c
 // ==== Challenge 1: Use .forEach() ====
 // The event director needs both the first and last names of each runner for their running bibs.  Combine both the first and last names into a new array called fullName. 
 let fullName = [];
+
+runners.forEach(element => {
+    let names = `${element.first_name} ${element.last_name}`;
+    fullName.push(names);
+});
+
 console.log(fullName);
+
 
 // ==== Challenge 2: Use .map() ====
 // The event director needs to have all the runner's first names converted to uppercase because the director BECAME DRUNK WITH POWER. Convert each first name into all caps and log the result
-let allCaps = [];
-console.log(allCaps); 
+
+// Create an array with all firstnames
+
+const allCaps = runners.map(runner => (runner.first_name.toUpperCase()));
+
+console.log(allCaps);
+
+
+/* const myResult = runners[1].map(element => element * element); */
 
 // ==== Challenge 3: Use .filter() ====
 // The large shirts won't be available for the event due to an ordering issue.  Get a list of runners with large sized shirts so they can choose a different size. Return an array named largeShirts that contains information about the runners that have a shirt size of L and log the result
-let largeShirts = [];
+const largeShirts = runners.filter(runner => runner.shirt_size == "L");
+
 console.log(largeShirts);
+
 
 // ==== Challenge 4: Use .reduce() ====
 // The donations need to be tallied up and reported for tax purposes. Add up all the donations into a ticketPriceTotal array and log the result
-let ticketPriceTotal = [];
-console.log(ticketPriceTotal);
+
+let reducer = function(accumulator, item) {
+    return accumulator + item.donation;
+}
+
+const ticketPriceTotal = runners.reduce(reducer, 0)
+
+console.log(ticketPriceTotal); 
+
 
 // ==== Challenge 5: Be Creative ====
 // Now that you have used .forEach(), .map(), .filter(), and .reduce().  I want you to think of potential problems you could solve given the data set and the 5k fun run theme.  Try to create and then solve 3 unique problems using one or many of the array methods listed above.
 
 // Problem 1
+// Find all donors with a donation bigger than 100 and put their lastname into an array sorted alphabetically
+
+// Create an array with all runners who made a donation bigger than 100
+const over100Donators = runners.filter(runner => runner.donation >= 100);
+
+// Create a new array with only the lastname of those donators
+let fullNamesOfOver100Donators = [];
+
+over100Donators.forEach(runner => {
+    fullNamesOfOver100Donators.push(runner.last_name);
+    fullNamesOfOver100Donators.sort();
+});
+
+console.log(fullNamesOfOver100Donators);
+
 
 // Problem 2
+// Find all runners who are sized S and whose name start by S
+
+// List of all donators who are sized S
+const smallShirts = runners.filter(runner => runner.shirt_size == "S");
+
+// Filter only people whose names start by S
+let smallAndS =[];
+
+smallShirts.forEach(runner => {
+    if (runner.last_name.charAt(0) == "S") {
+        smallAndS.push(runner.last_name);
+    }
+})
+
+console.log(smallAndS);
+
 
 // Problem 3
+// Who has the longest email adress?
+
+//Find what is the longest email length
+function getLengthOfLongestEmail(array) {
+    return Math.max(0, ...array.map(runner => runner.email.length));
+}
+
+longestEmail = getLengthOfLongestEmail(runners);
+
+//Output a list of all runners with an email size of 30 characters
+const longestEmailRunners = runners.filter(runner => runner.email.length == 30);
+
+// Finally return the amazing fact
+console.log(`Hi, my name is ${longestEmailRunners[0].first_name} ${longestEmailRunners[0].last_name} and amazingly, I'm the only runner with the longest email and whose shirt size is the same as the initial of his lastname. rui discovered this by chance while doing this exercise.`);

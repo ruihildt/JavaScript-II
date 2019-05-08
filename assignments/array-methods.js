@@ -148,4 +148,4 @@ longestEmail = getLengthOfLongestEmail(runners);
 const longestEmailRunners = runners.filter(runner => runner.email.length == 30);
 
 // Finally return the amazing fact
-console.log(`Hi, my name is ${longestEmailRunners[0].first_name} ${longestEmailRunners[0].last_name} and amazingly, I'm the only runner with the longest email and whose shirt size is the same as the initial of his lastname. Rui discovered this by chance while doing this exercise.`);
+console.log(`Hi, my name is ${longestEmailRunners[0].first_name} ${longestEmailRunners[0].last_name} and amazingly, I'm the only runner with the longest email and whose shirt size is the same as the initial of his lastname. rui discovered this by chance while doing this exercise.`);
